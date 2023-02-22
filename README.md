@@ -1,5 +1,4 @@
 # Simple Shell hsh
-
 ### Prerequisites
 Only use the following functions and system calls:
 ```
