@@ -5,6 +5,7 @@
  * @c: the char being searched for
  * Return: pointer to char on success, NULL on failure
  */
+
 char *_strchr(char *s, char c)
 {
 	int len, n;
@@ -25,6 +26,7 @@ char *_strchr(char *s, char c)
  * @accept: string to match
  * Return: number of matching bytes
  */
+
 unsigned int _strspn(char *s, char *accept)
 {
 	int s_len, n, result;
@@ -47,6 +49,7 @@ unsigned int _strspn(char *s, char *accept)
  * @delims: bytes to search for in the string.
  * Return: pointer to first occurence in s of anything in accept
  */
+
 char *_strpbrk(char *s, char *delims)
 {
 	char *temp;
@@ -74,6 +77,7 @@ char *_strpbrk(char *s, char *delims)
  * @save_ptr: saves index in tokenized s so that repeated fn calls fetch tokens
  * Return: pointer to next token
  */
+
 char *_strtok_r(char *s, char *delim, char **save_ptr)
 {
 	char *token;
