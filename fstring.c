@@ -1,6 +1,6 @@
-//#include "shell.h"
-#include <stdio.h>
-#include <string.h>
+#include "shell.h"
+//#include <stdio.h>
+//#include <string.h>
 
 int f_strlen(char *s);
 int f_strcmp(char *s, char *t);

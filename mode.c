@@ -1,4 +1,4 @@
-#include "shelll.h"
+#include "shell.h"
 
 /**
  * mode - a function that determines the current shell mode
