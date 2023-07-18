@@ -42,5 +42,12 @@ int f_strcmp(char *s, char *t);
 char *f_starts_with(const char *haystack, const char *needle);
 char *f_strcat(char *destination, char *source);
 char *f_strcpy(char *dst, char *src);
+char f_strdup(const char *str);
+void _puts(char *str);
+int _putchar(char c);
+int f_eputchar(char c);
+void f_eputs(char *str);
+int f_writefd(char c, int fd);
+int f_putsfd(char *str, int fd);
 
 #endif
