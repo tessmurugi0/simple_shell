@@ -46,18 +46,20 @@ int f_strcmp(char *s, char *t)
 {
     int counter = 0;
 
-    while (*s && *t)
+    while (s[counter] && t[counter])
     {
-        if (s[counter] == t[counter])
+        if (s[counter] != t[counter])
         {
-           s[counter]++;
-           t[counter]++;
+            return(-1);
         }
-        else
-        {
-            return(1);
-        }
+        counter++;
     }
+
+    if (s[counter] != t[counter])
+    {
+        return(-1);
+    }
+
     return(0);
 }
 
