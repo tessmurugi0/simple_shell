@@ -6,6 +6,9 @@
 #include <unistd.h>
 #include <string.h>
 
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
+#define BUF_FLUSH -1
 
 typedef struct info
 {
@@ -38,5 +41,6 @@ int f_strlen(char *s);
 int f_strcmp(char *s, char *t);
 char *f_starts_with(const char *haystack, const char *needle);
 char *f_strcat(char *destination, char *source);
+char *f_strcpy(char *dst, char *src);
 
 #endif
