@@ -49,5 +49,10 @@ int f_eputchar(char c);
 void f_eputs(char *str);
 int f_writefd(char c, int fd);
 int f_putsfd(char *str, int fd);
-
+int show_help(shell_data_t *shell_data);
+int change_directory(shell_data_t *shell_data);
+int exit_shell(shell_data_t *shell_data);
+char *_strchr(const char *s, char c);
+char *_strncat(char *dest, const char *src, int n);
+char *_strncpy(char *dest, const char *src, int n);
 #endif
