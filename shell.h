@@ -9,6 +9,7 @@
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
+#define INT_MAX 2147483647
 
 typedef struct info
 {
@@ -55,4 +56,10 @@ int exit_shell(shell_data_t *shell_data);
 char *_strchr(const char *s, char c);
 char *_strncat(char *dest, const char *src, int n);
 char *_strncpy(char *dest, const char *src, int n);
+int custom_atoi(const char *s);
+void print_error(info_t *info, char *estr);
+int print_d(int input, int fd);
+char *convert_number(long int num, int base, int flags);
+void remove_comments(char *buf);
+
 #endif
