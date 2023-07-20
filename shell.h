@@ -61,5 +61,8 @@ void print_error(info_t *info, char *estr);
 int print_d(int input, int fd);
 char *convert_number(long int num, int base, int flags);
 void remove_comments(char *buf);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 #endif
