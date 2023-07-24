@@ -64,5 +64,14 @@ void remove_comments(char *buf);
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+int _myenv(info_t *info);
+char *f_getenv(info_t *info, const char *name);
+int _mysetenv(info_t *info);
+int _myunsetenv(info_t *info);
+int populate_env_list(info_t *info);
+int bfree(void** ptr);
+int is_cmd(info_t* info, char* path);
+char *dup_chars(char *pathstr, int start, int stop);
+char *find_path(info_t *info, char *pathstr, char *cmd);
 
 #endif
