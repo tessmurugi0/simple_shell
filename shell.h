@@ -64,6 +64,8 @@ typedef struct builtin
 int mode(info_t *info);
 int isdelimeter(char c, char *delimeter);
 int isalpha(int c);
+void create_envi(char **envi);
+void free_env(char **env);
 int _atoi(char *s);
 int f_strlen(char *s);
 int f_strcmp(char *s, char *t);
@@ -105,5 +107,11 @@ int delete_node_at_index(list_t **start_ptr, unsigned int position);
 size_t print_list_strings(const list_t *head);
 list_t *add_last_node(list_t **start_ptr, const char *text, int number);
 list_t *add_new_node(list_t **start, const char *text, int number);
-
+char *error_env(char **args);
+char *error_1(char **args);
+char *error_2_exit(char **args);
+char *error_2_cd(char **args);
+char *error_2_syntax(char **args);
+char *error_126(char **args);
+char *error_127(char **args);
 #endif
