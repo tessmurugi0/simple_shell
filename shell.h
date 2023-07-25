@@ -56,6 +56,15 @@ typedef struct info
     int cmd_buf_type;
     int readfd;
     int histcount;
+    char *argument;
+    char **arguments;
+    char *path;
+    int arg_count;
+    char *filename;
+    char **command_buffer;
+    char **environment;
+    char **environ;
+    int read_file_descriptor;
 } info_t;
 
 /**
@@ -133,5 +142,6 @@ char **convert_list_to_strings(list_t *start);
 size_t print_custom_list(const list_t *head);
 list_t *find_node_starts_with(list_t *start, char *search_prefix, char target_char);
 ssize_t find_node_index(list_t *start, list_t *target_node);
+
 
 #endif
