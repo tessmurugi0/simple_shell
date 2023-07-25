@@ -6,9 +6,11 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
+#include <limits.h>
 #include <fcntl.h>
-#include <stdlib.h>
+#include <errno.h>
 #include <dirent.h>
 #include <signal.h>
 
@@ -16,6 +18,22 @@
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
 #define INT_MAX 2147483647
+
+#define CMD_NORM	0
+#define CMD_OR		1
+#define CMD_AND		2
+#define CMD_CHAIN	3
+#define CONVERT_UNSIGNED	2
+
+#define USE_GETLINE 0
+#define USE_STRTOK 0
+
+#define HIST_FILE	".simple_shell_history"
+#define HIST_MAX	4096
+
+extern char **environ;
+
+
 
 typedef struct info
 {
@@ -110,4 +128,10 @@ list_t *add_new_node(list_t **start, const char *text, int number);
 char *_custom_memset(char *dest, char ch, unsigned int n);
 void custom_free_strings(char **str_arr);
 void *_custom_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+size_t count_list_nodes(const list_t *head);
+char **convert_list_to_strings(list_t *start);
+size_t print_custom_list(const list_t *head);
+list_t *find_node_starts_with(list_t *start, char *search_prefix, char target_char);
+ssize_t find_node_index(list_t *start, list_t *target_node);
+
 #endif
