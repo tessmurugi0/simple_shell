@@ -1,165 +1,192 @@
 #include "shell.h"
+
+
 /**
- * error_env - Creates an error message for shellby_env errors.
- * @args: An array of arguments passed to the command.
- *
- * Return: The error string.
- */
-char *error_env(char **args)
+ * f_erratoi - converts string to integer
+ * @s: the string to convert
+ * 
+ * Return: integer numbers on success, on error
+ * error message
+*/
+
+int custom_atoi(const char *s)
 {
-	char *error, *hist_str;
-	int len;
+    int i = 0;
+    int sign = 1;
+    long int result = 0;
 
-	hist_str = _itoa(hist);
-	if (!hist_str)
-		return (NULL);
+    if (*s == '-')
+    {
+        sign = -1;
+        s++;
+    }
+    else if (*s == '+')
+    {
+        s++;
+    }
 
-	args--;
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 45;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
-	{
-		free(hist_str);
-		return (NULL);
-	}
+    for (i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] >= '0' && s[i] <= '9')
+        {
+            result *= 10;
+            result += (s[i] - '0');
+            if (sign == 1 && result > INT_MAX)
+                return INT_MAX;
+            else if (sign == -1 && -result < INT_MIN)
+                return INT_MIN;
+        }
+        else
+        {
+            /**Invalid input, return 0 or handle as needed for your use case.*/
+            return 0;
+        }
+    }
+    return sign * (int)result;
+}
 
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": ");
-	_strcat(error, args[0]);
-	_strcat(error, ": Unable to add/remove from environment\n");
 
-	free(hist_str);
-	return (error);
+
+/**
+ * print_error - prints an error message
+ * @info: information on the struct used
+ * @estr: the error type
+ * 
+ * Return: on success, 0
+*/
+
+void print_error(info_t *info, char *estr)
+{
+	f_eputs(info->fname);
+	f_eputs(": ");
+	print_d(info->line_count, STDERR_FILENO);
+	f_eputs(": ");
+	f_eputs(info->argv[0]);
+	f_eputs(": ");
+	f_eputs(estr);
 }
 
 /**
- * error_1 - Creates an error message for shellby_alias errors.
- * @args: An array of arguments passed to the command.
- *
- * Return: The error string.
- */
-char *error_1(char **args)
+ * print-d - Creates a decimal integer number
+ * @input: data fetced from the standard input
+ * @fd- file descriptor
+ * 
+ * Return: number
+*/
+
+int print_d(int input, int fd)
 {
-	char *error;
-	int len;
+    int (*__putchar)(char) = (fd == STDERR_FILENO) ? f_eputchar : f_putchar;
+    int count = 0;
+    unsigned int _abs_, current;
 
-	len = _strlen(name) + _strlen(args[0]) + 13;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
-		return (NULL);
+    if (input < 0)
+    {
+        __putchar('-');
+        count++;
+        _abs_ = -input;
+    }
+    else
+    {
+        _abs_ = input;
+    }
 
-	_strcpy(error, "alias: ");
-	_strcat(error, args[0]);
-	_strcat(error, " not found\n");
+    if (_abs_ == 0)
+    {
+        __putchar('0');
+        return(1);
+    }
 
-	return (error);
+    int i;
+    for (i = 1000000000; i > 0; i /= 10)
+    {
+        if (_abs_ / i)
+        {
+            current = _abs_ / i;
+            __putchar('0' + current);
+            count++;
+        }
+        else if (count > 0)
+        {
+            __putchar('0');
+            count++;
+        }
+        _abs_ %= i;
+    }
+
+    return(count);
 }
 
 /**
- * error_2_exit - Creates an error message for shellby_exit errors.
- * @args: An array of arguments passed to the command.
- *
- * Return: The error string.
- */
-char *error_2_exit(char **args)
+ * convert-number - converts a function to an integer
+ * @num: the string literal to be converted
+ * @base: the base number
+ * @flags: function arguments
+ * 
+ * Return: Pointer to the converted number
+*/
+
+char *convert_number(long int num, int base, int flags)
 {
-	char *error, *hist_str;
-	int len;
+    static char buffer[50];
+    char sign = 0;
+    char *array;
+    char *ptr;
+    unsigned long n = num;
 
-	hist_str = _itoa(hist);
-	if (!hist_str)
-		return (NULL);
+    if (!(flags & 0x01) && num < 0)
+    {
+        n = -num;
+        sign = '-';
+    }
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 27;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
-	{
-		free(hist_str);
-		return (NULL);
-	}
+    array = (flags & 0x02) ? "0123456789abcdef" : "0123456789ABCDEF";
+    ptr = &buffer[49];
+    *ptr = '\0';
 
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": exit: Illegal number: ");
-	_strcat(error, args[0]);
-	_strcat(error, "\n");
+    do {
+        *--ptr = array[n % base];
+        n /= base;
+    } while (n != 0);
 
-	free(hist_str);
-	return (error);
+    if (sign)
+        *--ptr = sign;
+    
+    return ptr;
 }
 
 /**
- * error_2_cd - Creates an error message for shellby_cd errors.
- * @args: An array of arguments passed to the command.
- *
- * Return: The error string.
- */
-char *error_2_cd(char **args)
+ * remove_comments - removes comments from m a block of C code
+ * @buf: variable used to store the code before comments
+ * are removed
+ * 
+ * Return: NULL
+*/
+
+void remove_comments(char *buf)
 {
-	char *error, *hist_str;
-	int len;
+    int i;
+    boolean comment_found = false;
 
-	hist_str = _itoa(hist);
-	if (!hist_str)
-		return (NULL);
+    for (i = 0; buf[i] != '\0'; i++)
+    {
+        if (buf[i] == '#' && (i == 0 || buf[i - 1] == ' '))
+        {
+            comment_found = true;
+            buf[i] = '\0';
+            break;
+        }
+    }
 
-	if (args[0][0] == '-')
-		args[0][2] = '\0';
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 24;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
-	{
-		free(hist_str);
-		return (NULL);
-	}
-
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	if (args[0][0] == '-')
-		_strcat(error, ": cd: Illegal option ");
-	else
-		_strcat(error, ": cd: can't cd to ");
-	_strcat(error, args[0]);
-	_strcat(error, "\n");
-
-	free(hist_str);
-	return (error);
-}
-
-/**
- * error_2_syntax - Creates an error message for syntax errors.
- * @args: An array of arguments passed to the command.
- *
- * Return: The error string.
- */
-char *error_2_syntax(char **args)
-{
-	char *error, *hist_str;
-	int len;
-
-	hist_str = _itoa(hist);
-	if (!hist_str)
-		return (NULL);
-
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 33;
-	error = malloc(sizeof(char) * (len + 1));
-	if (!error)
-	{
-		free(hist_str);
-		return (NULL);
-	}
-
-	_strcpy(error, name);
-	_strcat(error, ": ");
-	_strcat(error, hist_str);
-	_strcat(error, ": Syntax error: \"");
-	_strcat(error, args[0]);
-	_strcat(error, "\" unexpected\n");
-
-	free(hist_str);
-	return (error);
+    // If a comment was found and removed, remove any trailing spaces.
+    if (comment_found)
+    {
+        for (i--; i >= 0; i--)
+        {
+            if (buf[i] == ' ')
+                buf[i] = '\0';
+            else
+                break;
+        }
+    }
 }
