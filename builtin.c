@@ -1,12 +1,5 @@
 #include "shell.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <dirent.h>
-#include <signal.h>
+
 
 /**
  * exit_shell - Exits the shell

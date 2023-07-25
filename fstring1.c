@@ -37,7 +37,7 @@ char *f_strcpy(char *dst, char *src)
  * Return: the duplicated string
 */
 
-char f_strdup(const char *str)
+char* f_strdup(const char *str)
 {
     int len = 0;
     char *dup;

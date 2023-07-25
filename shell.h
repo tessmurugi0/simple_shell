@@ -5,6 +5,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <signal.h>
 
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
@@ -34,6 +40,27 @@ typedef struct info
     int histcount;
 } info_t;
 
+/**
+ * struct liststr - singly linked list
+ * @num: number field
+ * @str: string
+ * @next: next node
+ */
+typedef struct liststring
+{
+	int num;
+	char *str;
+	struct liststr *next;
+} list_t;
+
+typedef struct builtin
+{
+	char *type;
+	int (*func)(info_t *);
+} builtin_table;
+
+
+
 int mode(info_t *info);
 int isdelimeter(char c, char *delimeter);
 int isalpha(int c);
@@ -43,7 +70,7 @@ int f_strcmp(char *s, char *t);
 char *f_starts_with(const char *haystack, const char *needle);
 char *f_strcat(char *destination, char *source);
 char *f_strcpy(char *dst, char *src);
-char f_strdup(const char *str);
+char* f_strdup(const char *str);
 void _puts(char *str);
 int _putchar(char c);
 int f_eputchar(char c);
@@ -69,8 +96,8 @@ char *f_getenv(info_t *info, const char *name);
 int _mysetenv(info_t *info);
 int _myunsetenv(info_t *info);
 int populate_env_list(info_t *info);
-int bfree(void** ptr);
-int is_cmd(info_t* info, char* path);
+int memfree(void** ptr);
+int is_command(info_t* info, char* path);
 char *dup_chars(char *pathstr, int start, int stop);
 char *find_path(info_t *info, char *pathstr, char *cmd);
 
