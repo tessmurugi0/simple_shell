@@ -100,5 +100,10 @@ int memfree(void** ptr);
 int is_command(info_t* info, char* path);
 char *dup_chars(char *pathstr, int start, int stop);
 char *find_path(info_t *info, char *pathstr, char *cmd);
+void release_list(list_t **start_ptr);
+int delete_node_at_index(list_t **start_ptr, unsigned int position);
+size_t print_list_strings(const list_t *head);
+list_t *add_last_node(list_t **start_ptr, const char *text, int number);
+list_t *add_new_node(list_t **start, const char *text, int number);
 
 #endif
