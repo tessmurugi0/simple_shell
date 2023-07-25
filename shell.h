@@ -142,6 +142,10 @@ char **convert_list_to_strings(list_t *start);
 size_t print_custom_list(const list_t *head);
 list_t *find_node_starts_with(list_t *start, char *search_prefix, char target_char);
 ssize_t find_node_index(list_t *start, list_t *target_node);
-
+char *get_history_file(info_t *info);
+int write_history(info_t *info);
+int read_history(info_t *info);
+int build_history_list(info_t *info, char *buf, int linecount);
+int renumber_history(info_t *info);
 
 #endif
