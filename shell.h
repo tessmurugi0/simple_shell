@@ -147,5 +147,6 @@ int write_history(info_t *info);
 int read_history(info_t *info);
 int build_history_list(info_t *info, char *buf, int linecount);
 int renumber_history(info_t *info);
-
+char **split_str_by_delim(char *str, char *delim);
+char **split_str_by_char(char *str, char delimiter);
 #endif
