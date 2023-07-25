@@ -114,4 +114,7 @@ char *error_2_cd(char **args);
 char *error_2_syntax(char **args);
 char *error_126(char **args);
 char *error_127(char **args);
+char *_custom_memset(char *dest, char ch, unsigned int n);
+void custom_free_strings(char **str_arr);
+void *_custom_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 #endif
