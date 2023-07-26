@@ -1,16 +1,13 @@
 #include "shell.h"
-
 /**
  * is_interactive - returns true if shell is interactive mode
  * @info: struct address
- *
  * Return: 1 if interactive mode, 0 otherwise
  */
 int is_interactive(info_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
-
 /**
  * is_delimiter - checks if character is a delimeter
  * @c: the char to check
@@ -24,13 +21,11 @@ int is_delimiter(char c, char *delim)
 			return (1);
 	return (0);
 }
-
 /**
- * is_alphabetic - checks for alphabetic character
+ * is_alphabetic - checks for alphabetical character
  * @c: The character to input
  * Return: 1 if c is alphabetic, 0 otherwise
  */
-
 int is_alphabetic(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
@@ -38,10 +33,9 @@ int is_alphabetic(int c)
 	else
 		return (0);
 }
-
 /**
  * string_to_int - converts a string to an integer
- * @s: the string to be converted
+ * @s: the string to be converted.
  * Return: 0 if no numbers in string, converted number otherwise
  */
 
