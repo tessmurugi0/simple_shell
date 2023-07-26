@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * print_history - displays the history list, one command by line, preceded
  *              with line numbers, starting at 0.
@@ -35,12 +34,10 @@ int unset_alias(info_t *info, char *alias_str)
 	*equal_sign = temp_char;
 	return (ret);
 }
-
 /**
  * set_alias - sets alias to string
  * @info: parameter struct
  * @alias_str: the string alias
- *
  * Return: Always 0 on success, 1 on error
  */
 int set_alias(info_t *info, char *alias_str)
@@ -79,7 +76,6 @@ int print_alias(list_t *node)
 	}
 	return (1);
 }
-
 /**
  * print_aliases - mimics the alias builtin (man alias)
  * @info: Structure containing potential arguments. Used to maintain
