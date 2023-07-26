@@ -17,7 +17,6 @@ void signal_to_handle(int sig)
  * @argv:Program Name
  * Return: -1 or  0
  */
-
 void read_file(char *filename, char **argv)
 {
 	FILE *fp;
@@ -102,4 +101,3 @@ void exit_bul_for_file(char **cmd, char *line, FILE *fd)
 	fclose(fd);
 	exit(statue);
 }
-
