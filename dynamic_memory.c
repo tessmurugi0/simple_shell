@@ -1,9 +1,8 @@
 #include <stdlib.h>
 #include "shell.h"
 /**
-* free_pointer - Frees a pointer and sets the address to NULL
+* free_pointer - Frees a pointer and sets the to address to NULL
 * @ptr: Address of the pointer to free
-*
 * Return: 1 if freed, otherwise 0.
 */
 int free_pointer(void **ptr)
