@@ -76,7 +76,7 @@ void print_error(info_t *info, char *estr)
 
 int print_d(int input, int fd)
 {
-    int (*__putchar)(char) = (fd == STDERR_FILENO) ? f_eputchar : f_putchar;
+    int (*__putchar)(char) = (fd == STDERR_FILENO) ? _eputchar : _putchar;
     int count = 0;
     unsigned int _abs_, current;
 
@@ -166,7 +166,7 @@ char *convert_number(long int num, int base, int flags)
 void remove_comments(char *buf)
 {
     int i;
-    boolean comment_found = false;
+    comment_found = false;
 
     for (i = 0; buf[i] != '\0'; i++)
     {

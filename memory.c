@@ -8,7 +8,7 @@
  * Return: on success, 0
 */
 
-int memfree(void** ptr)
+int bfree(void** ptr)
 {
     if (ptr != NULL && *ptr != NULL)
     {

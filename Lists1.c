@@ -30,7 +30,7 @@ size_t count_list_nodes(const list_t *head)
 char **convert_list_to_strings(list_t *start)
 {
     list_t *node = start;
-    size_t node_count = list_len(start), i, j;
+    size_t node_count = count_list_nodes(start), i, j;
     char **string_array;
     char *string;
 
@@ -43,7 +43,7 @@ char **convert_list_to_strings(list_t *start)
 
     for (i = 0; node; node = node->next, i++)
     {
-        string = malloc(_strlen(node->str) + 1);
+        string = malloc(f_strlen(node->str) + 1);
         if (!string)
         {
             for (j = 0; j < i; j++)
@@ -99,7 +99,7 @@ list_t *find_node_starts_with(list_t *start, char *search_prefix, char target_ch
 
     while (start)
     {
-        prefix_ptr = starts_with(start->str, search_prefix);
+        prefix_ptr = f_starts_with(start->str, search_prefix);
         if (prefix_ptr && ((target_char == -1) || (*prefix_ptr == target_char)))
             return start;
         start = start->next;

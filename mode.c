@@ -38,7 +38,7 @@ int isdelimeter(char c, char *delimeter)
     {
         if (*delimeter == c)
         {
-            reurn(1);
+            return(1);
             delimeter++;
         }
     }
@@ -82,24 +82,24 @@ int _atoi(char *s)
         {
             sign = sign * -1;
         }
-            if (s[counter] > '0' && s[counter] <= '9')
-            {
-                flag = 1;
-                result1 = result1 * 10;
-                result1 = result1 + (s[counter] - '0');
-            }
-            else if (flag == 1)
-            {
-                flag = 2;
-            }
-        else if (flag == -1)
+        if (s[counter] > '0' && s[counter] <= '9')
         {
-            result = -result;
+            flag = 1;
+            result1 = result1 * 10;
+            result1 = result1 + (s[counter] - '0');
         }
-        else
+        else if (flag == 1)
         {
-            result = result1;
+            flag = 2;
         }
+    }
+    else if (flag == -1)
+    {
+        result = -result;
+    }
+    else
+    {
+        result = result1;
     }
     return (result);
 }

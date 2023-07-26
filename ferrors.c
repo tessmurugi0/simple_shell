@@ -12,7 +12,7 @@
 int f_eputchar(char c)
 {
     static int a = 0;
-    static buf[WRITE_BUF_SIZE];
+    static int buf[WRITE_BUF_SIZE];
 
     if (c == '\n' || c >= WRITE_BUF_SIZE - 1)
     {

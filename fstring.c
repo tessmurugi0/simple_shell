@@ -2,6 +2,11 @@
 //#include <stdio.h>
 //#include <string.h>
 
+int f_strlen(char *s);
+int f_strcmp(char *s, char *t);
+char *f_starts_with(const char *haystack, const char *needle);
+char *f_strcat(char *destination, char *source);
+
 /**
  * f_strlen - loops through a string and returns its length
  * as an integer

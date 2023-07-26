@@ -126,7 +126,7 @@ int _mysetenv(info_t *info);
 int _myunsetenv(info_t *info);
 int populate_env_list(info_t *info);
 int memfree(void** ptr);
-int is_command(info_t* info, char* path);
+int fis_command(info_t* info, char* path);
 char *dup_chars(char *pathstr, int start, int stop);
 char *find_path(info_t *info, char *pathstr, char *cmd);
 void release_list(list_t **start_ptr);
@@ -142,6 +142,11 @@ char **convert_list_to_strings(list_t *start);
 size_t print_custom_list(const list_t *head);
 list_t *find_node_starts_with(list_t *start, char *search_prefix, char target_char);
 ssize_t find_node_index(list_t *start, list_t *target_node);
+int check_command_chain(info_t *information, char *buffer, size_t *index);
+void evaluate_command_chain(info_t *information, char *buffer, size_t *index, size_t current_index, size_t buffer_length);
+int replace_command_alias(info_t *information);
+int replace_variables(info_t *information);
+int replace_string_content(char **old_str, char *new_str);
 char *get_history_file(info_t *info);
 int write_history(info_t *info);
 int read_history(info_t *info);
@@ -149,4 +154,5 @@ int build_history_list(info_t *info, char *buf, int linecount);
 int renumber_history(info_t *info);
 char **split_str_by_delim(char *str, char *delim);
 char **split_str_by_char(char *str, char delimiter);
+
 #endif
